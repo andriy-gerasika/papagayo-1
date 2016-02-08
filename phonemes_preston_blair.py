@@ -51,6 +51,7 @@ phoneme_set = [
 # Phoneme conversion dictionary: CMU on the left to Preston Blair on the right
 phoneme_conversion = {
 	'AA': 'AI', # FPD
+	'IY': 'E', # FPD
 	'AA0': 'AI', # odd     AA D
 	'AA1': 'AI',
 	'AA2': 'AI',
