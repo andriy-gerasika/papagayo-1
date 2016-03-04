@@ -22,7 +22,9 @@
 import os
 import sys
 import wx
+import codecs
 from LipsyncFrame import LipsyncFrame
+from LipsyncDoc import *
 
 class LipsyncApp(wx.App):
 	def OnInit(self):
@@ -37,7 +39,35 @@ class LipsyncApp(wx.App):
 
 # end of class LipsyncApp
 
-if __name__ == "__main__":
+if __name__ == "__main__" and len(sys.argv) > 2:
+	language = sys.argv[1]
+	wavFileName = sys.argv[2]
+	if len(sys.argv) > 3:
+		txtFileName = sys.argv[3]
+	else:
+		txtFileName = wavFileName.rsplit('.', 1)[0] + ".txt"
+	if len(sys.argv) > 4:
+		pgoFileName = sys.argv[4]
+	else:
+		pgoFileName = wavFileName.rsplit('.', 1)[0] + ".pgo"
+
+	languageManager = LanguageManager()
+	languageManager.InitLanguages()
+	phonemeSet = PhonemeSet()
+
+	doc = LipsyncDoc(languageManager, None)
+	doc.fps = 24
+	doc.OpenAudio(wavFileName)
+	doc.voices.append(LipsyncVoice("Voice 1"))
+	doc.currentVoice = doc.voices[0]
+	doc.dirty = True
+	with codecs.open(txtFileName, 'r', "utf-8") as txtFile:
+		doc.currentVoice.text = txtFile.read()
+	doc.currentVoice.RunBreakdown(doc.soundDuration, None, language, languageManager, phonemeSet)
+
+	doc.Save(pgoFileName)
+
+elif __name__ == "__main__":
 	papagayo = LipsyncApp(0)
 	papagayo.mainFrame.TheApp = papagayo
 	papagayo.mainFrame.waveformView.TheApp = papagayo

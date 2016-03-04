@@ -205,7 +205,7 @@ class LipsyncVoice:
 					phonemeCount = phonemeCount + 1
 		# now divide up the total time by phonemes
 		if frameDuration > 0 and phonemeCount > 0:
-			framesPerPhoneme = int(float(frameDuration) / float(phonemeCount))
+			framesPerPhoneme = float(frameDuration) / float(phonemeCount)
 			if framesPerPhoneme < 1:
 				framesPerPhoneme = 1
 		else:
@@ -215,11 +215,11 @@ class LipsyncVoice:
 		for phrase in self.phrases:
 			for word in phrase.words:
 				for phoneme in word.phonemes:
-					phoneme.frame = curFrame
+					phoneme.frame = int(curFrame)
 					curFrame = curFrame + framesPerPhoneme
 				if len(word.phonemes) == 0: # deal with unknown words
-					word.startFrame = curFrame
-					word.endFrame = curFrame + 3
+					word.startFrame = int(curFrame)
+					word.endFrame = int(curFrame) + 3
 					curFrame = curFrame + 4
 				else:
 					word.startFrame = word.phonemes[0].frame
