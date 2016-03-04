@@ -176,14 +176,23 @@ class LipsyncVoice:
 
 	def RunBreakdown(self, frameDuration, parentWindow, language, languagemanager, phonemeset):
 		# make sure there is a space after all punctuation marks
-		repeatLoop = True
-		while repeatLoop:
-			repeatLoop = False
-			for i in range(len(self.text) - 1):
-				if (self.text[i] in ".,!?;-/()") and (not self.text[i + 1].isspace()):
-					self.text = self.text[:i + 1] + ' ' + self.text[i + 1:]
-					repeatLoop = True
+		oldText = self.text
+		newText = ""
+		while len(oldText) > 0:
+			oldTextLen = len(oldText)
+			for i in range(len(oldText) - 1):
+				if oldText[i] in ".,!?;-/()":
+					if oldText[i + 1].isspace():
+						newText = newText + oldText[:i + 1] + '\n'
+						oldText = oldText[i + 2:]
+					else:
+						newText = newText + oldText[:i + 1] + ' '
+						oldText = oldText[i + 1:]
 					break
+			if len(oldText) == oldTextLen:
+				newText += oldText
+				oldText = ""
+		self.text = newText
 		# break text into phrases
 		self.phrases = []
 		for line in self.text.splitlines():
