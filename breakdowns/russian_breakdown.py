@@ -63,10 +63,10 @@ def breakdownWord(word, recursive=False):
         'u': 'UW0',
         'v': 'V',
         'x': 'HH',  # use 'Y' ?? 'K'??
-        u'\N{LATIN SMALL LETTER S WITH CARON}': 'SH',  # š
-        u'\N{LATIN SMALL LETTER Z WITH CARON}': 'ZH',  # ž
-        u'\N{LATIN CAPITAL LETTER S WITH CARON}': 'SH',  # Š
-        u'\N{LATIN CAPITAL LETTER Z WITH CARON}': 'ZH',  # Ž
+        u'\N{LATIN SMALL LETTER S WITH CARON}': 'SH',  # ï¿½
+        u'\N{LATIN SMALL LETTER Z WITH CARON}': 'ZH',  # ï¿½
+        u'\N{LATIN CAPITAL LETTER S WITH CARON}': 'SH',  # ï¿½
+        u'\N{LATIN CAPITAL LETTER Z WITH CARON}': 'ZH',  # ï¿½
         # Cyrillic
         u'\N{CYRILLIC SMALL LETTER A}': 'AA0',
         u'\N{CYRILLIC SMALL LETTER BE}': 'B',
@@ -90,8 +90,8 @@ def breakdownWord(word, recursive=False):
         u'\N{CYRILLIC SMALL LETTER SHA}': 'SH',
         u'\N{CYRILLIC SMALL LETTER TE}': 'T',
         u'\N{CYRILLIC SMALL LETTER U}': 'UW0',
-        u'\N{CYRILLIC SMALL LETTER HARD SIGN}': '',
-        u'\N{CYRILLIC SMALL LETTER SOFT SIGN}': '',
+        u'\N{CYRILLIC SMALL LETTER HARD SIGN}': 'Y',
+        u'\N{CYRILLIC SMALL LETTER SOFT SIGN}': 'Y',
         u'\N{CYRILLIC SMALL LETTER YERU}': 'IH0',
         u'\N{CYRILLIC SMALL LETTER ZHE}': 'ZH',
         u'\N{CYRILLIC SMALL LETTER ZE}': 'Z',
@@ -118,8 +118,8 @@ def breakdownWord(word, recursive=False):
         u'\N{CYRILLIC CAPITAL LETTER SHA}': 'SH',
         u'\N{CYRILLIC CAPITAL LETTER TE}': 'T',
         u'\N{CYRILLIC CAPITAL LETTER U}': 'UW0',
-        u'\N{CYRILLIC CAPITAL LETTER HARD SIGN}': '',
-        u'\N{CYRILLIC CAPITAL LETTER SOFT SIGN}': '',
+        u'\N{CYRILLIC CAPITAL LETTER HARD SIGN}': 'Y',
+        u'\N{CYRILLIC CAPITAL LETTER SOFT SIGN}': 'Y',
         u'\N{CYRILLIC CAPITAL LETTER YERU}': 'IH0',
         u'\N{CYRILLIC CAPITAL LETTER ZHE}': 'ZH',
         u'\N{CYRILLIC CAPITAL LETTER ZE}': 'Z',
@@ -228,7 +228,7 @@ def breakdownWord(word, recursive=False):
 
 
 if __name__ == "__main__":
-    testwords = "égaux Vse ljudi roždajutsya svobodnymi i ravnymi v svoem dostoinstve i pravah Oni nadeleny razumom i sovest'ju i dolžny postupat' v otnošenii drug druga v duhe bratstva".split()
+    testwords = "ï¿½gaux Vse ljudi roï¿½dajutsya svobodnymi i ravnymi v svoem dostoinstve i pravah Oni nadeleny razumom i sovest'ju i dolï¿½ny postupat' v otnoï¿½enii drug druga v duhe bratstva".split()
     testwordsC = u"\N{CYRILLIC CAPITAL LETTER VE}"
     u"\N{CYRILLIC SMALL LETTER ES}"
     u"\N{CYRILLIC SMALL LETTER IE}"
