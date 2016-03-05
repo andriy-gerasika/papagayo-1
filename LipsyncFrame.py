@@ -24,6 +24,8 @@ import string
 import math
 import wx
 import webbrowser
+import codecs
+
 from utilities import *
 # begin wxGlade: dependencies
 from MouthView import MouthView
@@ -389,7 +391,7 @@ class LipsyncFrame(wx.Frame):
 					self.doc.currentVoice = self.doc.voices[0]
 					# check for a .trans file with the same name as the doc
 					try:
-						txtFile = file(paths[0].rsplit('.', 1)[0]+".trans", 'r')
+						txtFile = codecs.open(path.rsplit('.', 1)[0]+".txt", 'r', "utf-8")
 						for line in txtFile:
 							self.voiceText.AppendText(line)
 					except:

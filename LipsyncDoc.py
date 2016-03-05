@@ -28,8 +28,9 @@ import traceback
 import sys
 import breakdowns
 
-strip_symbols = '.,!?;-/()"'
+strip_symbols = '.,!?:;-/()"'
 strip_symbols += u'\N{INVERTED QUESTION MARK}'
+strip_symbols += u'\N{INVERTED EXCLAMATION MARK}'
 
 
 ###############################################################
