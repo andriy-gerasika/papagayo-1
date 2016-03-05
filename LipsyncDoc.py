@@ -182,16 +182,19 @@ class LipsyncVoice:
 			oldTextLen = len(oldText)
 			for i in range(len(oldText) - 1):
 				if oldText[i] in ".,!?;-/()":
+					newText += oldText[:i + 1]
 					if oldText[i + 1].isspace():
-						newText = newText + oldText[:i + 1] + '\n'
+						newText += '\n'
 						oldText = oldText[i + 2:]
 					else:
-						newText = newText + oldText[:i + 1] + ' '
+						newText += ' '
 						oldText = oldText[i + 1:]
 					break
 			if len(oldText) == oldTextLen:
 				newText += oldText
 				oldText = ""
+				break
+		assert oldText == ""
 		self.text = newText
 		# break text into phrases
 		self.phrases = []
@@ -207,11 +210,13 @@ class LipsyncVoice:
 		# for first-guess frame alignment, count how many phonemes we have
 		phonemeCount = 0
 		for phrase in self.phrases:
+			if phonemeCount > 0:
+				phonemeCount += 4
 			for word in phrase.words:
 				if len(word.phonemes) == 0: # deal with unknown words
 					phonemeCount = phonemeCount + 4
-				for phoneme in word.phonemes:
-					phonemeCount = phonemeCount + 1
+				else:
+					phonemeCount = phonemeCount + len(word.phonemes)
 		# now divide up the total time by phonemes
 		if frameDuration > 0 and phonemeCount > 0:
 			framesPerPhoneme = float(frameDuration) / float(phonemeCount)
@@ -222,17 +227,19 @@ class LipsyncVoice:
 		# finally, assign frames based on phoneme durations
 		curFrame = 0
 		for phrase in self.phrases:
+			if curFrame > 0:
+				curFrame += 4 * framesPerPhoneme
 			for word in phrase.words:
 				for phoneme in word.phonemes:
-					phoneme.frame = int(curFrame)
+					phoneme.frame = int(round(curFrame))
 					curFrame = curFrame + framesPerPhoneme
 				if len(word.phonemes) == 0: # deal with unknown words
-					word.startFrame = int(curFrame)
-					word.endFrame = int(curFrame) + 3
+					word.startFrame = int(round(curFrame))
+					word.endFrame = int(round(curFrame)) + 3
 					curFrame = curFrame + 4
 				else:
 					word.startFrame = word.phonemes[0].frame
-					word.endFrame = word.phonemes[-1].frame + framesPerPhoneme - 1
+					word.endFrame = word.phonemes[-1].frame + int(round(framesPerPhoneme)) - 1
 			phrase.startFrame = phrase.words[0].startFrame
 			phrase.endFrame = phrase.words[-1].endFrame
 
