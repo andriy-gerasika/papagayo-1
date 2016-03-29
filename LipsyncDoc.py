@@ -84,6 +84,8 @@ class LipsyncWord:
 				phoneme.text = p
 				self.phonemes.append(phoneme)
 		except:
+			if len(sys.argv) > 2:
+				return
 			traceback.print_exc()
 			# this word was not found in the phoneme dictionary
 			dlg = PronunciationDialog(parentWindow, phonemeset.set)
