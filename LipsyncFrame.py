@@ -37,7 +37,7 @@ from LipsyncDoc import *
 
 appTitle = "Papagayo"
 lipsyncExtension = ".pgo"
-audioExtensions = "*.wav;*.mp3;*.aiff;*.aif;*.au;*.snd;*.mov;*.m4a"
+audioExtensions = "*.WAV;*.wav;*.mp3;*.aiff;*.aif;*.au;*.snd;*.mov;*.m4a"
 openWildcard = "%s and sound files|*%s;%s" % (appTitle, lipsyncExtension, audioExtensions)
 openAudioWildcard = "Sound files|%s" % (audioExtensions)
 saveWildcard = "%s files (*%s)|*%s" % (appTitle, lipsyncExtension, lipsyncExtension)
