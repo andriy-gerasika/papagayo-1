@@ -75,6 +75,7 @@ class LipsyncWord:
 				try:
 					pronunciation.append(phonemeset.conversion[pronunciation_raw[i]])
 				except:
+					pronunciation.append(pronunciation_raw[i])
 					print "Unknown phoneme:", pronunciation_raw[i], "in word:", text
 			
 			for p in pronunciation:
